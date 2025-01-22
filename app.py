@@ -6,7 +6,7 @@ with open("./models/model.pkl", "rb") as f:
     model = pickle.load(f)
 
 def classify_text(prompt):
-    try:
+    try: 
         prediction = model.predict([prompt])[0]
         probability = model.predict_proba([prompt]).max()
         
