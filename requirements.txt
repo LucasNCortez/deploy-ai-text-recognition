@@ -1,1 +1,4 @@
+tensorflow
+keras
 gradio
+scikit-learn
