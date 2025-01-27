@@ -3,8 +3,4 @@ keras
 gradio
 scikit-learn
 joblib
-numpy
-pandas
-seaborn
-torch
 spacy
