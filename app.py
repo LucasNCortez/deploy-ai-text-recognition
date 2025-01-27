@@ -1,7 +1,6 @@
 import gradio as gr
 import joblib
-import pickle
-import os
+from preprocessing import clean_text
 
 def load_models():    
     with open('../models/model.pkl', 'rb') as model_file:
@@ -14,8 +13,10 @@ def load_models():
 
 def classify_text(text):
     try: 
+        clean_text = clean_text(text)
+
         model, vectorizer = load_models()
-        X = vectorizer.transform([text])
+        X = vectorizer.transform([clean_text])
 
         if hasattr(X, "toarray"):  # Verifica se o método 'toarray' existe
             X = X.toarray()
