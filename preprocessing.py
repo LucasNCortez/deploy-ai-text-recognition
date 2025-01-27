@@ -129,5 +129,5 @@ pipeline_clean_text = Pipeline([
 
 nlp_spacy = spacy.load('en_core_web_sm')
 
-def clean_text(text: str) -> str:
+def clean_text(text):
     return pipeline_clean_text.fit_transform([text])[0]
