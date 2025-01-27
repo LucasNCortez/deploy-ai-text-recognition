@@ -1,18 +1,31 @@
 import gradio as gr
+import joblib
 import pickle
 import os
 
-with open("./models/model.pkl", "rb") as f:
-    model = pickle.load(f)
+def load_models():    
+    with open('../models/model.pkl', 'rb') as model_file:
+        model = joblib.load(model_file)
 
-def classify_text(prompt):
+    # Carregar o vectorizer
+    with open('../models/vectorizer.pkl', 'rb') as vectorizer_file:
+        vectorizer = joblib.load(vectorizer_file)
+    return model,vectorizer
+
+def classify_text(text):
     try: 
-        prediction = model.predict([prompt])[0]
-        probability = model.predict_proba([prompt]).max()
+        model, vectorizer = load_models()
+        X = vectorizer.transform([text])
+
+        if hasattr(X, "toarray"):  # Verifica se o método 'toarray' existe
+            X = X.toarray()
+
+        prediction = model.predict(X)
+        probability = model.predict_proba(X)[0][1]
         
         # Ajustar para formato do output do modelo
         result = f"Classificação: {'Escrita por LLM' if prediction == 1 else 'Escrita por Humano'}\n"
-        result += f"Confiança: {probability:.2%}"
+        result += f"Confiança: {probability:.2%}" if prediction == 1 else f"Confiança: {1 - probability:.2%}"
         return result
     except Exception as e:
         return f"Erro ao processar o texto: {str(e)}"
