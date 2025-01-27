@@ -5,7 +5,7 @@ import unicodedata
 import spacy
 import os
 
-os.system('pip install models/en_core_web_sm-3.8.0-py3-none-any.whl')
+os.system('python -m spacy download en_core_web_sm')
 
 nlp_spacy = spacy.load('en_core_web_sm')
 
