@@ -5,7 +5,6 @@ scikit-learn
 joblib
 numpy
 pandas
-sklearn
 seaborn
 unicodedata
 re
