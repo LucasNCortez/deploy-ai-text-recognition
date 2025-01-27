@@ -3,8 +3,11 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer
 import unicodedata
 import spacy
+import os
 
-nlp_spacy = spacy.load('.models/en_core_web_sm-3.8.0-py3-none-any.whl')
+os.system('pip install models/en_core_web_sm-3.8.0-py3-none-any.whl')
+
+nlp_spacy = spacy.load('en_core_web_sm')
 
 def remove_excessive_spaces(text: str) -> str:
     """
