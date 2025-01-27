@@ -3,11 +3,11 @@ import joblib
 from preprocessing import clean_text
 
 def load_models():    
-    with open('../models/model.pkl', 'rb') as model_file:
+    with open('./models/model.pkl', 'rb') as model_file:
         model = joblib.load(model_file)
 
     # Carregar o vectorizer
-    with open('../models/vectorizer.pkl', 'rb') as vectorizer_file:
+    with open('./models/vectorizer.pkl', 'rb') as vectorizer_file:
         vectorizer = joblib.load(vectorizer_file)
     return model,vectorizer
 
