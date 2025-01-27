@@ -22,11 +22,11 @@ def classify_text(text):
             X = X.toarray()
 
         prediction = model.predict(X)
-        probability = model.predict_proba(X)[0][1]
+        # probability = model.predict_proba(X)[0][1]
         
         # Ajustar para formato do output do modelo
         result = f"Classificação: {'Escrita por LLM' if prediction == 1 else 'Escrita por Humano'}\n"
-        result += f"Confiança: {probability:.2%}" if prediction == 1 else f"Confiança: {1 - probability:.2%}"
+        # result += f"Confiança: {probability:.2%}" if prediction == 1 else f"Confiança: {1 - probability:.2%}"
         return result
     except Exception as e:
         return f"Erro ao processar o texto: {str(e)}"
