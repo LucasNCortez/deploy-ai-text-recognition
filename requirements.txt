@@ -6,5 +6,8 @@ joblib
 numpy
 pandas
 sklearn
-matplotlib
 seaborn
+unicodedata
+re
+torch
+spacy
