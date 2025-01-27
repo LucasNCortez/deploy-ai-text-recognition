@@ -1,6 +1,6 @@
 import gradio as gr
 import joblib
-#from preprocessing import clean_text
+from preprocessing import clean_text
 
 def load_models():    
     with open('./models/model.pkl', 'rb') as model_file:
@@ -15,7 +15,7 @@ def classify_text(text):
     if not text:
         return "Forneça um texto para classificar"
     try: 
-        cleaned_text = text #clean_text(text)
+        cleaned_text = clean_text(text)
 
         model, vectorizer = load_models()
         X = vectorizer.transform([cleaned_text])
@@ -27,7 +27,7 @@ def classify_text(text):
         
         # Ajustar para formato do output do modelo
         result = f"Classificação: {'Escrita por LLM' if prediction == 1 else 'Escrita por Humano'}\n"
-        
+
         return result
     except Exception as e:
         return f"Erro ao processar o texto: {str(e)}"

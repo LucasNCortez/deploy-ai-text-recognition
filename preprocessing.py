@@ -3,9 +3,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer
 import unicodedata
 import spacy
-import os
 
-os.system('python -m spacy download en_core_web_sm')
+nlp_spacy = spacy.load('.models/en_core_web_sm-3.8.0-py3-none-any.whl')
 
 def remove_excessive_spaces(text: str) -> str:
     """
@@ -65,8 +64,7 @@ def fix_isolated_commas_in_text(text: str) -> str:
     Returns:
         str: The text with isolated commas fixed.
     """
-    text = re.sub(r' ([.,:;!?])', r'\1', text)
-    return text.strip()
+    return re.sub(r' ([.,:;!?])', r'\1', text).strip()
 
 def keep_words_longer_than(text: str, min_length: int = 2) -> str:
     """
@@ -118,16 +116,16 @@ def lemmatize_text_with_spacy(text: str) -> str:
     doc = nlp_spacy(text)
     return ' '.join([token.lemma_ for token in doc])
 
-
 pipeline_clean_text = Pipeline([
     ('remove_first_line_from_text', FunctionTransformer(remove_first_line_from_text)),
     ('remove_last_line_from_text', FunctionTransformer(remove_last_line_from_text)),
     ('remove_excessive_spaces', FunctionTransformer(remove_excessive_spaces)),
     ('remove_repeated_non_word_characters', FunctionTransformer(remove_repeated_non_word_characters)),
     ('fix_isolated_commas_in_text', FunctionTransformer(fix_isolated_commas_in_text)),
+    ('keep_only_alphabet_characters', FunctionTransformer(keep_only_alphabet_characters)),
+    ('remove_accents_from_text', FunctionTransformer(remove_accents_from_text)),
+    ('lemmatize_text_with_spacy', FunctionTransformer(lemmatize_text_with_spacy)),
 ])
 
-nlp_spacy = spacy.load('en_core_web_sm')
-
-def clean_text(text):
+def clean_text(text: str) -> str:
     return pipeline_clean_text.fit_transform([text])[0]
