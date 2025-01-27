@@ -2,3 +2,9 @@ tensorflow
 keras
 gradio
 scikit-learn
+joblib
+numpy
+pandas
+sklearn
+matplotlib
+seaborn
