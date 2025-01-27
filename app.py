@@ -13,10 +13,10 @@ def load_models():
 
 def classify_text(text):
     try: 
-        clean_text = clean_text(text)
+        cleaned_text = clean_text(text)  # Renomeado para evitar conflito de nome
 
         model, vectorizer = load_models()
-        X = vectorizer.transform([clean_text])
+        X = vectorizer.transform([cleaned_text])
 
         if hasattr(X, "toarray"):  # Verifica se o método 'toarray' existe
             X = X.toarray()
