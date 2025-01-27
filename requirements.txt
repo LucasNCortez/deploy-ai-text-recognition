@@ -6,7 +6,6 @@ joblib
 numpy
 pandas
 seaborn
-unicodedata
 re
 torch
 spacy
