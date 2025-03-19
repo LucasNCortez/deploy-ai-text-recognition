@@ -10,3 +10,5 @@ pinned: false
 short_description: Detects if a text is human made or LLM made
 ---
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+
+Link para acesso ao modelo utilizavel: https://huggingface.co/spaces/LucasNCortez/ai-text-recognition-mlops-dl-ufrn
